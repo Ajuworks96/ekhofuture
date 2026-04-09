@@ -1,11 +1,11 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import Image from "next/image";
 import Link from "next/link";
-import { Menu, X, ChevronRight } from "lucide-react";
-import { LOGO_URL, MENU_LOGO_URL } from "../constants/data";
+import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
+import { Menu, X, ArrowRight } from "lucide-react";
+import { LOGO_URL } from "../constants/data";
 
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -13,7 +13,9 @@ export function Navbar() {
   const [showServices, setShowServices] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 50);
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 50);
+    };
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
@@ -21,23 +23,38 @@ export function Navbar() {
   const groupedServices = [
     {
       category: "Outdoor Clothings",
-      items: ["Old School", "Trend Setter"]
+      items: [
+        { name: "Old School", href: "/old-school" },
+        { name: "Trend Setter", href: "/trend-setter" }
+      ]
     },
     {
       category: "Life Care",
-      items: ["Lubnas Dental Clinic", "Hopeful Steps"]
+      items: [
+        { name: "Lubnas Dental Clinic", href: "/lubnas-dental" },
+        { name: "Hopeful Steps", href: "/hopeful-steps" }
+      ]
     },
     {
       category: "Smart Kitchen",
-      items: ["Compliment", "Pots And Pan"]
+      items: [
+        { name: "Compliment", href: "#" },
+        { name: "Pots And Pan", href: "#" }
+      ]
     },
     {
       category: "Single Categories",
-      items: ["Builders & Realtors", "Pure Flow"]
+      items: [
+        { name: "Builders & Realtors", href: "#" },
+        { name: "Pure Flow", href: "#" }
+      ]
     },
     {
       category: "Ekho Digix",
-      items: ["Agency", "Ekho Skillbyte Academy"]
+      items: [
+        { name: "Agency", href: "#" },
+        { name: "Ekho Skillbyte Academy", href: "#" }
+      ]
     }
   ];
 
@@ -180,12 +197,16 @@ export function Navbar() {
                           <div className="grid grid-cols-2 gap-x-12 gap-y-4">
                             {group.items.map(item => (
                               <Link 
-                                key={item} 
-                                href="#" 
+                                key={item.name} 
+                                href={item.href}
+                                onClick={() => {
+                                  setIsOpen(false);
+                                  setShowServices(false);
+                                }}
                                 className="group/item flex items-center gap-3 text-white/40 hover:text-white transition-all duration-300 text-base md:text-lg font-medium py-1"
                               >
                                 <span className="w-1.5 h-1.5 bg-yellow-400 rounded-full opacity-0 -translate-x-4 group-hover/item:opacity-100 group-hover/item:translate-x-0 transition-all duration-500" />
-                                <span className="group-hover/item:translate-x-1 transition-transform duration-500 whitespace-nowrap">{item}</span>
+                                <span className="group-hover/item:translate-x-1 transition-transform duration-500 whitespace-nowrap">{item.name}</span>
                               </Link>
                             ))}
                           </div>
