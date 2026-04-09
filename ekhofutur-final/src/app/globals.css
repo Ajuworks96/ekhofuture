@@ -1,0 +1,48 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #000000;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  overflow-x: hidden;
+}
+
+/* Custom Utilities */
+.text-outline {
+  -webkit-text-stroke: 1px rgba(255,255,255,0.1);
+  color: transparent;
+}
+
+@keyframes liquidFlowRight {
+  0% { transform: translateX(-120%) scale(0.8) rotate(-5deg); opacity: 0; }
+  30% { opacity: 0.6; }
+  100% { transform: translateX(120%) scale(1.2) rotate(5deg); opacity: 0; }
+}
+
+@keyframes liquidFlowLeft {
+  0% { transform: translateX(120%) scale(0.8) rotate(5deg); opacity: 0; }
+  30% { opacity: 0.6; }
+  100% { transform: translateX(-120%) scale(1.2) rotate(-5deg); opacity: 0; }
+}
+
+@keyframes ripple-pulse {
+  0% { transform: scale(0.5); opacity: 0.8; }
+  50% { transform: scale(1.5); opacity: 0.3; }
+  100% { transform: scale(2.5); opacity: 0; }
+}
+
+.animate-liquid-right {
+  animation: liquidFlowRight 10s infinite linear;
+}
+
+.animate-liquid-left {
+  animation: liquidFlowLeft 12s infinite linear;
+}
+
+.animate-ripple {
+  animation: ripple-pulse 3s infinite ease-out;
+}
