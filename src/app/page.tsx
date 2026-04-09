@@ -1,6 +1,7 @@
 import { Navbar } from "./components/Navbar";
 import { Hero } from "./components/Hero";
 import { WhatWeDo } from "./components/WhatWeDo";
+import { Categories } from "./components/Categories";
 import { LatestCreations } from "./components/LatestCreations";
 import { IndustryTimeline } from "./components/IndustryTimeline";
 import { About } from "./components/About";
@@ -15,7 +16,7 @@ export default function Home() {
       <div className="relative z-10 bg-white">
         <WhatWeDo />
         <LatestCreations />
-        <IndustryTimeline />
+        <Categories />
         <About />
         <Testimonials />
       </div>

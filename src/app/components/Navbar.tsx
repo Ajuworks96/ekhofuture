@@ -18,15 +18,27 @@ export function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const servicesColumn1 = [
-    "Old School", "Lubna's Dental Studio", "Home Appliances", 
-    "Pots & Pets", "Coworking", "Wellness", 
-    "EV Charging Station", "Ekho Digix"
-  ];
-
-  const servicesColumn2 = [
-    "Trendsetter", "Speech", "Compliment", 
-    "Realtors", "Ekhora Scapes", "Solar", "Pureflow"
+  const groupedServices = [
+    {
+      category: "Outdoor Clothings",
+      items: ["Old School", "Trend Setter"]
+    },
+    {
+      category: "Life Care",
+      items: ["Lubnas Dental Clinic", "Hopeful Steps"]
+    },
+    {
+      category: "Smart Kitchen",
+      items: ["Compliment", "Pots And Pan"]
+    },
+    {
+      category: "Single Categories",
+      items: ["Builders & Realtors", "Pure Flow"]
+    },
+    {
+      category: "Ekho Digix",
+      items: ["Agency", "Ekho Skillbyte Academy"]
+    }
   ];
 
   return (
@@ -145,7 +157,7 @@ export function Navbar() {
                 </nav>
               </div>
 
-              {/* Right Panel: Services Submenu */}
+              {/* Right Panel: Grouped Services Submenu */}
               <AnimatePresence>
                 {showServices && (
                   <motion.div
@@ -153,43 +165,32 @@ export function Navbar() {
                     animate={{ opacity: 1, x: 0 }}
                     exit={{ opacity: 0, x: 50 }}
                     transition={{ duration: 0.4, ease: "easeOut" }}
-                    className="hidden lg:flex flex-col justify-center w-1/2 border-l border-white/10 pl-20"
+                    className="hidden lg:flex flex-col justify-center w-1/2 border-l border-white/10 pl-20 overflow-y-auto py-20 scrollbar-hide"
                   >
-                    <div className="grid grid-cols-2 gap-x-20 gap-y-6">
-                      <div className="space-y-4">
-                        {servicesColumn1.map((service, idx) => (
-                           <motion.div
-                            key={service}
-                            initial={{ opacity: 0, y: 10 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ delay: idx * 0.05 }}
-                           >
-                            <Link 
-                              href="#" 
-                              className="text-white/40 hover:text-white transition-colors text-lg font-medium block"
-                            >
-                              {service}
-                            </Link>
-                           </motion.div>
-                        ))}
-                      </div>
-                      <div className="space-y-4">
-                        {servicesColumn2.map((service, idx) => (
-                           <motion.div
-                            key={service}
-                            initial={{ opacity: 0, y: 10 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ delay: (idx + servicesColumn1.length) * 0.05 }}
-                           >
-                            <Link 
-                              href="#" 
-                              className="text-white/40 hover:text-white transition-colors text-lg font-medium block"
-                            >
-                              {service}
-                            </Link>
-                           </motion.div>
-                        ))}
-                      </div>
+                    <div className="grid grid-cols-1 gap-12">
+                      {groupedServices.map((group, idx) => (
+                        <motion.div 
+                          key={group.category}
+                          initial={{ opacity: 0, y: 20 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          transition={{ delay: idx * 0.1 + 0.3 }}
+                          className="space-y-6"
+                        >
+                          <h4 className="text-white text-xs font-black uppercase tracking-[0.4em] opacity-30">{group.category}</h4>
+                          <div className="grid grid-cols-2 gap-x-12 gap-y-4">
+                            {group.items.map(item => (
+                              <Link 
+                                key={item} 
+                                href="#" 
+                                className="group/item flex items-center gap-3 text-white/40 hover:text-white transition-all duration-300 text-base md:text-lg font-medium py-1"
+                              >
+                                <span className="w-1.5 h-1.5 bg-yellow-400 rounded-full opacity-0 -translate-x-4 group-hover/item:opacity-100 group-hover/item:translate-x-0 transition-all duration-500" />
+                                <span className="group-hover/item:translate-x-1 transition-transform duration-500 whitespace-nowrap">{item}</span>
+                              </Link>
+                            ))}
+                          </div>
+                        </motion.div>
+                      ))}
                     </div>
                   </motion.div>
                 )}
