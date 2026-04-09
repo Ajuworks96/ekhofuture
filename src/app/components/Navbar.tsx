@@ -38,7 +38,7 @@ export function Navbar() {
     {
       category: "Smart Kitchen",
       items: [
-        { name: "Compliment", href: "#" },
+        { name: "Compliment", href: "/compliment" },
         { name: "Pots And Pan", href: "#" }
       ]
     },
